@@ -13,5 +13,5 @@ import java.lang.annotation.Target;
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Binder {
-    String binder() default "Binder_";
+    String[] binder() default {};
 }
