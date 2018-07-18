@@ -14,7 +14,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 
-@Binder(binder = "anno_")
+@Binder(binder = {"anno_"})
 public class MainActivity extends AppCompatActivity {
     @Validator(min_length = 4,id = R.id.firstname)
     EditText anno_firstname;
@@ -28,14 +28,14 @@ public class MainActivity extends AppCompatActivity {
     EditText anno_email;
     @Validator(required = true, only_numeric = true,id = R.id.mobile)
     EditText anno_mobile;
+    Button anno_validate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         new BinderClass(MainActivity.this).bind();
-        final Button validate = (Button)findViewById(R.id.validate);
-        validate.setOnClickListener(new View.OnClickListener() {
+        anno_validate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 FieldsValidator validator = new FieldsValidator(MainActivity.this);
@@ -43,8 +43,7 @@ public class MainActivity extends AppCompatActivity {
                 if(!response.equalsIgnoreCase("")){
                     Toast.makeText(MainActivity.this,response,Toast.LENGTH_LONG).show();
                 }else{
-                    Intent i = new Intent(MainActivity.this,FragmentsActivity.class);
-                    startActivity(i);
+                    Toast.makeText(MainActivity.this,"submitted",Toast.LENGTH_LONG).show();
                 }
             }
         });

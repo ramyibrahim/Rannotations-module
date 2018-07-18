@@ -27,13 +27,19 @@ public class FieldsValidator {
         this.context = fragment.getContext();
         this.fields = fragment.getClass().getFields();
     }
+
+    public FieldsValidator(android.app.Fragment fragment) {
+        this.context = fragment.getActivity();
+        this.fields = fragment.getClass().getFields();
+    }
+
     public String validate(){
         String Error = "";
         for(Field field : fields) {
             Validator annotation = (Validator)field.getAnnotation(Validator.class);
             if(annotation != null) {
                 int resID = annotation.id() == 0 ? context.getResources().getIdentifier(field.getName(), "id", context.getPackageName()):annotation.id();
-                EditText edit = (EditText)((Activity)context).findViewById(resID);
+                EditText edit = ((Activity)context).findViewById(resID);
                 String text = edit.getText().toString();
                 if(annotation.is_trimable()){
                     text = text.trim();

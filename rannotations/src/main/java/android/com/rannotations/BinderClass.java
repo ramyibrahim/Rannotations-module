@@ -18,7 +18,7 @@ public class BinderClass {
     Field[] fields;
     Binder annotation;
     Fragment fragment;
-    View FView;
+    android.app.Fragment app_fragment;
     public BinderClass(Context context){
         this.context = context;
         this.fields = context.getClass().getFields();
@@ -32,17 +32,30 @@ public class BinderClass {
         this.fragment = fragment;
     }
 
+    public BinderClass(android.app.Fragment fragment) {
+        this.fields = fragment.getClass().getFields();
+        this.annotation = fragment.getClass().getAnnotation(Binder.class);
+        this.context = fragment.getActivity();
+        this.app_fragment = fragment;
+    }
+
 
     public void bind(){
         for(Field field : fields) {
-            if(annotation.binder().equalsIgnoreCase("") || field.getName().toString().startsWith(annotation.binder())){
-                int resID = context.getResources().getIdentifier(field.getName().substring(annotation.binder().length()), "id", context.getPackageName());
-                View view = ((Activity)context).findViewById(resID);
+            int binder_index = isExistInArray(field.getName().toString(),annotation.binder());
+            if(annotation.binder().length == 0 || binder_index >= 0){
                 try {
-                    if(fragment != null)
-                        field.set(fragment,view);
-                    else
-                        field.set(context,view);
+                    int resID = context.getResources().getIdentifier(field.getName().substring(annotation.binder()[binder_index].length()), "id", context.getPackageName());
+                    if(resID > 0){
+                        View view = ((Activity)context).findViewById(resID);
+                        if(fragment != null)
+                            field.set(fragment,view);
+                        else if(app_fragment != null)
+                            field.set(app_fragment,view);
+                        else
+                            field.set(context,view);
+                    }
+
                 } catch (IllegalAccessException e) {
                     e.printStackTrace();
                 }catch (Exception e){
@@ -51,5 +64,13 @@ public class BinderClass {
                 Log.i("BinderClass",field.getName()+" : "+ field.getType().toString());
             }
         }
+    }
+
+    private int isExistInArray(String s, String[] binders) {
+        for(int i = 0 ; i < binders.length; i++){
+            if(s.startsWith(binders[i]))
+                return i;
+        }
+        return -1;
     }
 }

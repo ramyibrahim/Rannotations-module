@@ -2,9 +2,12 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/RAnnotationsmodule.iml" filepath="$PROJECT_DIR$/RAnnotationsmodule.iml" />
+      <module fileurl="file://$PROJECT_DIR$/RAnnotation module.iml" filepath="$PROJECT_DIR$/RAnnotation module.iml" />
+      <module fileurl="file://D:\freelance\RAnnotation module\RAnnotationsmodule.iml" filepath="D:\freelance\RAnnotation module\RAnnotationsmodule.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://D:\freelance\RAnnotation module\app\app.iml" filepath="D:\freelance\RAnnotation module\app\app.iml" />
       <module fileurl="file://$PROJECT_DIR$/rannotations/rannotations.iml" filepath="$PROJECT_DIR$/rannotations/rannotations.iml" />
+      <module fileurl="file://D:\freelance\RAnnotation module\rannotations\rannotations.iml" filepath="D:\freelance\RAnnotation module\rannotations\rannotations.iml" />
     </modules>
   </component>
 </project>
