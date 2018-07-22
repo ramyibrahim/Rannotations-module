@@ -6,7 +6,7 @@ This library contains two main annotations:-
 		if you are getting sick form null pointer exceptions because you always 
 		forget to bind your view reference using findViewById or you may try 
 		to use the view reference before binding it to the right view, then 
-		this annotation is the answer. only in 3 steps you can rid of this repeated problem.
+		this annotation is the answer. only in 3 steps you can get rid of this repeated problem.
 			
 			I- copy the following lines to your gradles files, then sync:-
 			
